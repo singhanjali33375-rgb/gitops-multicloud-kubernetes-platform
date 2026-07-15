@@ -1,3 +1,12 @@
+
 output "project_name" {
-  value = "GitOps MultiCloud Kubernetes Platform"
+  value = var.project_name
+}
+
+output "environment" {
+  value = var.environment
+}
+
+output "aws_region" {
+  value = var.aws_region
 }
