@@ -1,11 +1,9 @@
 # gitops-multicloud-kubernetes-platform
-Production-ready GitOps-driven Multi-Cloud Kubernetes Platform with ArgoCD, Terraform, Helm, Prometheus, Grafana, Karpenter, Cluster Autoscaler, Kubecost, and automated cost optimization across AWS, Azure, and GCP.
-GitOps Driven Multi-Cloud Kubernetes Platform with Automated Cost Optimization
-Project Overview
 This project demonstrates a production-grade GitOps-driven Multi-Cloud Kubernetes platform deployed across AWS, Azure, and Google Cloud Platform using Infrastructure as Code and GitOps principles.
 The platform automates infrastructure provisioning, Kubernetes application deployment, monitoring, autoscaling, security, and cloud cost optimization using industry-standard CNCF tools.
 The project follows modern DevOps and Platform Engineering best practices, enabling continuous delivery, infrastructure automation, observability, and FinOps-driven resource optimization.
 Features
+
 ✅ Multi-Cloud Kubernetes Deployment
 ✅ GitOps Continuous Delivery using ArgoCD
 ✅ Infrastructure Provisioning with Terraform
