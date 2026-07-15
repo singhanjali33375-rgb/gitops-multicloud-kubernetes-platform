@@ -1,0 +1,9 @@
+resource "aws_subnet" "private_2" {
+
+  vpc_id = aws_vpc.main.id
+
+  cidr_block = var.private_subnets[1]
+
+  availability_zone = var.availability_zones[1]
+
+}
