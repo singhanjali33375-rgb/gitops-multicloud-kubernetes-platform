@@ -1,4 +1,19 @@
+############################################################
+# Kubernetes Namespace
+############################################################
+
 apiVersion: v1
+
 kind: Namespace
+
+
 metadata:
-  name: production
+
+  name: gitops-app
+
+
+  labels:
+
+    app: gitops-app
+
+    environment: dev
