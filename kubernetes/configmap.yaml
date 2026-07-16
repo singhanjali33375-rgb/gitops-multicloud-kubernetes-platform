@@ -1,0 +1,23 @@
+############################################################
+# Application ConfigMap
+############################################################
+
+apiVersion: v1
+
+kind: ConfigMap
+
+
+metadata:
+
+  name: gitops-app-config
+
+  namespace: gitops-app
+
+
+data:
+
+  ENVIRONMENT: "production"
+
+  APP_NAME: "gitops-multicloud-platform"
+
+  APP_VERSION: "1.0.0"
