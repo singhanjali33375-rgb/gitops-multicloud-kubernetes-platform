@@ -1,4 +1,57 @@
+############################################################
+# AWS ALB Ingress
+############################################################
+
 apiVersion: networking.k8s.io/v1
+
 kind: Ingress
+
+
 metadata:
-  name: nginx-ingress
+
+  name: gitops-app-ingress
+
+  namespace: gitops-app
+
+
+  annotations:
+
+    kubernetes.io/ingress.class: alb
+
+
+    alb.ingress.kubernetes.io/scheme: internet-facing
+
+
+    alb.ingress.kubernetes.io/target-type: ip
+
+
+    alb.ingress.kubernetes.io/listen-ports: '[{"HTTP":80}]'
+
+
+
+spec:
+
+  rules:
+
+    - host: app.example.com
+
+
+      http:
+
+        paths:
+
+          - path: /
+
+            pathType: Prefix
+
+
+            backend:
+
+              service:
+
+                name: gitops-app-service
+
+
+                port:
+
+                  number: 80
