@@ -1,6 +1,41 @@
+############################################################
+# Flask Application Service
+############################################################
+
 apiVersion: v1
+
 kind: Service
+
+
 metadata:
-  name: nginx-service
+
+  name: gitops-app-service
+
+  namespace: gitops-app
+
+
+  labels:
+
+    app: gitops-app
+
+
+
 spec:
+
+  selector:
+
+    app: gitops-app
+
+
+
+  ports:
+
+    - protocol: TCP
+
+      port: 80
+
+      targetPort: 5000
+
+
+
   type: ClusterIP
