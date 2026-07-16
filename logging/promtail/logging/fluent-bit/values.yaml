@@ -1,0 +1,101 @@
+#############################################
+# Fluent Bit Helm Values
+#############################################
+
+serviceAccount:
+
+  create: true
+
+  name: fluent-bit
+
+service:
+
+  type: ClusterIP
+
+  port: 2020
+
+config:
+
+  service: |
+
+    [SERVICE]
+        Flush        1
+        Daemon       Off
+        Log_Level    info
+        HTTP_Server  On
+        HTTP_Listen  0.0.0.0
+        HTTP_Port    2020
+        #############################################
+# Input Configuration
+#############################################
+
+  inputs: |
+
+    [INPUT]
+        Name              tail
+        Path              /var/log/containers/*.log
+        Parser            cri
+        Tag               kube.*
+        Refresh_Interval  5
+
+#############################################
+# Filter Configuration
+#############################################
+
+  filters: |
+
+    [FILTER]
+        Name                kubernetes
+        Match               kube.*
+        Merge_Log           On
+        Keep_Log            Off
+        K8S-Logging.Parser  On
+        K8S-Logging.Exclude Off
+
+#############################################
+# Parser Configuration
+#############################################
+
+  parsers: |
+
+    [PARSER]
+        Name        cri
+        Format      regex
+        #############################################
+# Output Configuration
+#############################################
+
+  outputs: |
+
+    [OUTPUT]
+        Name        loki
+        Match       kube.*
+        Host        loki.logging.svc.cluster.local
+        Port        3100
+
+#############################################
+# Resources
+#############################################
+
+resources:
+
+  requests:
+
+    cpu: 100m
+
+    memory: 128Mi
+
+  limits:
+
+    cpu: 250m
+
+    memory: 256Mi
+
+#############################################
+# Service Monitor
+#############################################
+
+serviceMonitor:
+
+  enabled: true
+        
