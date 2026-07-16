@@ -1,0 +1,60 @@
+############################################################
+# Kubernetes Network Policy
+############################################################
+
+apiVersion: networking.k8s.io/v1
+
+kind: NetworkPolicy
+
+
+metadata:
+
+  name: gitops-app-network-policy
+
+  namespace: gitops-app
+
+
+
+spec:
+
+  podSelector:
+
+    matchLabels:
+
+      app: gitops-app
+
+
+
+  policyTypes:
+
+    - Ingress
+
+    - Egress
+
+
+
+  ingress:
+
+    - from:
+
+        - namespaceSelector: {}
+
+      ports:
+
+        - protocol: TCP
+
+          port: 5000
+
+
+
+  egress:
+
+    - to:
+
+        - namespaceSelector: {}
+
+      ports:
+
+        - protocol: TCP
+
+          port: 443
