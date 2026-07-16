@@ -1,0 +1,85 @@
+############################################################
+# GitOps App Helm Values
+############################################################
+
+
+replicaCount: 2
+
+
+image:
+
+  repository: YOUR_DOCKERHUB_USERNAME/gitops-app
+
+  pullPolicy: Always
+
+  tag: "latest"
+
+
+
+service:
+
+  type: ClusterIP
+
+  port: 80
+
+  targetPort: 5000
+
+
+
+container:
+
+  port: 5000
+
+
+
+env:
+
+  ENVIRONMENT: production
+
+  APP_NAME: gitops-multicloud-platform
+
+
+
+resources:
+
+  requests:
+
+    cpu: 100m
+
+    memory: 128Mi
+
+
+  limits:
+
+    cpu: 500m
+
+    memory: 512Mi
+
+
+
+autoscaling:
+
+  enabled: true
+
+  minReplicas: 2
+
+  maxReplicas: 10
+
+  targetCPUUtilizationPercentage: 70
+
+
+
+ingress:
+
+  enabled: true
+
+  className: alb
+
+  host: app.example.com
+
+
+  annotations:
+
+    alb.ingress.kubernetes.io/scheme: internet-facing
+
+    alb.ingress.kubernetes.io/target-type: ip
