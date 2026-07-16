@@ -1,0 +1,47 @@
+############################################################
+# ArgoCD Project
+############################################################
+
+apiVersion: argoproj.io/v1alpha1
+
+kind: AppProject
+
+metadata:
+
+  name: gitops-project
+
+  namespace: argocd
+
+
+spec:
+
+  description: GitOps Multi Cloud Platform
+
+
+  sourceRepos:
+
+    - "https://github.com/YOUR_GITHUB_USERNAME/gitops-multicloud-platform.git"
+
+
+  destinations:
+
+    - namespace: gitops-app
+
+      server: https://kubernetes.default.svc
+
+
+  clusterResourceWhitelist:
+
+    - group: "*"
+
+      kind: "*"
+
+
+  namespaceResourceWhitelist:
+
+    - group: "*"
+
+      kind: "*"
+      sourceRepos:
+
+  - "https://github.com/singhanjali33375-rgb/gitops-multicloud-platform.git"
