@@ -1,0 +1,38 @@
+apiVersion: batch/v1
+kind: CronJob
+metadata:
+  name: trivy-scan
+  namespace: security
+spec:
+  schedule: "0 2 * * *"
+  jobTemplate:
+    spec:
+      template:
+        spec:
+          restartPolicy: OnFailure
+          containers:
+            - name: trivy
+              image: aquasec/trivy:latest
+              command:
+                - trivy
+                - image
+                - nginx:latest
+
+              resources:
+                requests:
+                  cpu: 100m
+                  memory: 128Mi
+                limits:
+                  cpu: 250m
+                  memory: 256Mi
+                  securityContext:
+                runAsNonRoot: true
+                runAsUser: 1000
+
+              volumeMounts:
+                - name: cache
+                  mountPath: /root/.cache
+
+          volumes:
+            - name: cache
+              emptyDir: {}
